@@ -3,25 +3,73 @@
   "displayName": "Smart Terminal Filter",
   "description": "Filters terminal noise so you only see errors, warnings, and your own logs. AI-powered error explanation, log summarization, and natural language queries.",
   "version": "0.2.0",
-  "publisher": "YOUR_PUBLISHER_ID",
-  "repository": { "type": "git", "url": "https://github.com/YOUR_USERNAME/smart-terminal-filter" },
-  "engines": { "vscode": "^1.85.0" },
-  "categories": ["Other", "Debuggers"],
-  "keywords": ["terminal", "logs", "filter", "noise", "errors", "debug", "console"],
-  "activationEvents": ["onStartupFinished"],
+  "publisher": "apurvashelar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Apurvashelar/smart-terminal-filter"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Debuggers"
+  ],
+  "keywords": [
+    "terminal",
+    "logs",
+    "filter",
+    "noise",
+    "errors",
+    "debug",
+    "console"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      { "command": "smartTerminal.openPanel", "title": "Smart Terminal: Open Filtered Log Panel" },
-      { "command": "smartTerminal.clearLogs", "title": "Smart Terminal: Clear All Logs" },
-      { "command": "smartTerminal.toggleCapture", "title": "Smart Terminal: Toggle Log Capture" },
-      { "command": "smartTerminal.setVerbosity", "title": "Smart Terminal: Set Verbosity Level" },
-      { "command": "smartTerminal.exportLogs", "title": "Smart Terminal: Export Filtered Logs" },
-      { "command": "smartTerminal.explainError", "title": "Smart Terminal: AI — Explain Last Error" },
-      { "command": "smartTerminal.summarizeLogs", "title": "Smart Terminal: AI — Summarize Recent Logs" },
-      { "command": "smartTerminal.queryLogs", "title": "Smart Terminal: AI — Ask a Question About Logs" },
-      { "command": "smartTerminal.setApiKey", "title": "Smart Terminal: Set AI API Key" },
-      { "command": "smartTerminal.clearApiKey", "title": "Smart Terminal: Clear AI API Key" }
+      {
+        "command": "smartTerminal.openPanel",
+        "title": "Smart Terminal: Open Filtered Log Panel"
+      },
+      {
+        "command": "smartTerminal.clearLogs",
+        "title": "Smart Terminal: Clear All Logs"
+      },
+      {
+        "command": "smartTerminal.toggleCapture",
+        "title": "Smart Terminal: Toggle Log Capture"
+      },
+      {
+        "command": "smartTerminal.setVerbosity",
+        "title": "Smart Terminal: Set Verbosity Level"
+      },
+      {
+        "command": "smartTerminal.exportLogs",
+        "title": "Smart Terminal: Export Filtered Logs"
+      },
+      {
+        "command": "smartTerminal.explainError",
+        "title": "Smart Terminal: AI — Explain Last Error"
+      },
+      {
+        "command": "smartTerminal.summarizeLogs",
+        "title": "Smart Terminal: AI — Summarize Recent Logs"
+      },
+      {
+        "command": "smartTerminal.queryLogs",
+        "title": "Smart Terminal: AI — Ask a Question About Logs"
+      },
+      {
+        "command": "smartTerminal.setApiKey",
+        "title": "Smart Terminal: Set AI API Key"
+      },
+      {
+        "command": "smartTerminal.clearApiKey",
+        "title": "Smart Terminal: Clear AI API Key"
+      }
     ],
     "viewsContainers": {
       "panel": [
@@ -46,21 +94,82 @@
     "configuration": {
       "title": "Smart Terminal Filter",
       "properties": {
-        "smartTerminal.verbosityLevel": { "type": "number", "default": 2, "minimum": 1, "maximum": 5, "description": "Verbosity level (1=errors only, 2=+warnings, 3=+status, 4=+verbose, 5=everything)" },
-        "smartTerminal.autoOpen": { "type": "boolean", "default": true, "description": "Auto-open Smart Terminal panel when terminal output is detected" },
-        "smartTerminal.maxLogLines": { "type": "number", "default": 5000, "description": "Max log lines to retain in memory" },
-        "smartTerminal.frameworkDetection": { "type": "boolean", "default": true, "description": "Auto-detect project framework and apply tuned presets" },
-        "smartTerminal.collapseStackTraces": { "type": "boolean", "default": true, "description": "Collapse stack traces into expandable blocks" },
-        "smartTerminal.highlightUserLogs": { "type": "boolean", "default": true, "description": "Highlight console.log/print statements" },
-        "smartTerminal.customNoisePatterns": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Regex patterns to classify as noise" },
-        "smartTerminal.customSignalPatterns": { "type": "array", "default": [], "items": { "type": "string" }, "description": "Regex patterns to always show" },
-        "smartTerminal.ai.provider": { "type": "string", "default": "claude", "enum": ["claude", "openai", "ollama"], "description": "AI provider for error explanation and log queries" },
-"smartTerminal.ai.model": { "type": "string", "default": "", "description": "Model name override" },
-        "smartTerminal.ai.baseUrl": { "type": "string", "default": "", "description": "Custom base URL for Ollama or compatible endpoints" }
+        "smartTerminal.verbosityLevel": {
+          "type": "number",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Verbosity level (1=errors only, 2=+warnings, 3=+status, 4=+verbose, 5=everything)"
+        },
+        "smartTerminal.autoOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-open Smart Terminal panel when terminal output is detected"
+        },
+        "smartTerminal.maxLogLines": {
+          "type": "number",
+          "default": 5000,
+          "description": "Max log lines to retain in memory"
+        },
+        "smartTerminal.frameworkDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-detect project framework and apply tuned presets"
+        },
+        "smartTerminal.collapseStackTraces": {
+          "type": "boolean",
+          "default": true,
+          "description": "Collapse stack traces into expandable blocks"
+        },
+        "smartTerminal.highlightUserLogs": {
+          "type": "boolean",
+          "default": true,
+          "description": "Highlight console.log/print statements"
+        },
+        "smartTerminal.customNoisePatterns": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Regex patterns to classify as noise"
+        },
+        "smartTerminal.customSignalPatterns": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Regex patterns to always show"
+        },
+        "smartTerminal.ai.provider": {
+          "type": "string",
+          "default": "claude",
+          "enum": [
+            "claude",
+            "openai",
+            "ollama"
+          ],
+          "description": "AI provider for error explanation and log queries"
+        },
+        "smartTerminal.ai.model": {
+          "type": "string",
+          "default": "",
+          "description": "Model name override"
+        },
+        "smartTerminal.ai.baseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Custom base URL for Ollama or compatible endpoints"
+        }
       }
     },
     "keybindings": [
-      { "command": "smartTerminal.openPanel", "key": "ctrl+shift+l", "mac": "cmd+shift+l" }
+      {
+        "command": "smartTerminal.openPanel",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l"
+      }
     ],
     "colors": [
       {
@@ -81,9 +190,11 @@
     "compile:cli": "tsc -p tsconfig.cli.json",
     "watch": "tsc -watch -p tsconfig.json",
     "build": "npm run clean && npm run compile && npm run compile:cli",
-    "package": "vsce package --allow-missing-repository"
+    "package": "vsce package"
   },
-  "bin": { "smartlog": "./out-cli/cli/smartlog.js" },
+  "bin": {
+    "smartlog": "./out-cli/cli/smartlog.js"
+  },
   "devDependencies": {
     "@types/vscode": "^1.85.0",
     "@types/node": "^20.0.0",
