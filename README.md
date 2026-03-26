@@ -37,7 +37,7 @@ A persistent banner at the top of the panel shows the current state of your term
 Multi-line stack traces are collapsed into a single expandable block with a frame count and source file. Click to expand. Click the arrow to jump directly to the error line in your code.
 
 ### Error Trend Detection
-If the same error appears multiple times across runs, it gets a badge - **↻ 2nd time**, **↻ 3rd time** -or so recurring problems are immediately obvious.
+If the same error appears multiple times across runs, it gets a badge - **↻ 2nd time**, **↻ 3rd time** - or so recurring problems are immediately obvious.
 
 ### Framework Auto-Detection
 Automatically detects your project type by reading `package.json`, `manage.py`, `pom.xml`, and other config files, then applies the right noise/signal rules for that stack. Supported frameworks:
