@@ -1,6 +1,6 @@
 {
   "name": "smart-terminal-filter-pro",
-  "displayName": "Smart Terminal Filter",
+  "displayName": "Smart Terminal Filter - Pro",
   "description": "Filters terminal noise so you only see errors, warnings, and your own logs. AI-powered error explanation, log summarization, and natural language queries.",
   "version": "0.2.0",
   "icon": "images/icon.png",
