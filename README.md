@@ -106,7 +106,7 @@ Three AI buttons live inside the filtered log panel:
 - **Summarize**: 2–3 sentence TL;DR of the entire run: outcome, error count, warnings, and key events as bullet points.
 - **Ask**: natural language search through all captured log lines. Type *"slow database queries"* or *"what caused the crash?"* and get matching lines plus a conversational answer.
 
-### Standalone CLI — `smartlog`
+### Standalone CLI - `smartlog`
 Filter logs outside VS Code by piping through `smartlog`:
 
 ```bash
