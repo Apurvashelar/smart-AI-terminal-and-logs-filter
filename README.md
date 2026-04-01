@@ -22,7 +22,7 @@ Smart Terminal Filter solves both. Zero configuration required.
 A custom terminal that understands plain English. Open it with `Cmd+Shift+I`or by clicking on the icon below on status bar, describe what you want, and the AI translates it into the exact shell command for your platform and shell with a confirmation step before anything runs.
 
 ```
-ask ai> kill the process running on port 3000
+@yourDirectory (ask ai) >> kill the process running on port 3000
 Thinking...
 
 Suggested command:
