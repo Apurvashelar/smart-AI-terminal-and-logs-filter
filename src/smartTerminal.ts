@@ -6,6 +6,9 @@
  */
 
 import * as vscode from 'vscode';
+import * as os from 'os';
+import * as path from 'path';
+import * as fs from 'fs';
 import { spawn, ChildProcess } from 'child_process';
 import { CommandGenerator, GeneratedCommand, CommandContext } from './ai/commandGenerator';
 
@@ -269,6 +272,41 @@ export class SmartTerminal implements vscode.Pseudoterminal {
       return;
     }
 
+    // Intercept built-in commands that don't work through piped spawn (no real PTY)
+    if (command.trim() === 'clear' || command.trim() === 'cls') {
+      this.writeEmitter.fire('\x1b[2J\x1b[H');
+      this.showPrompt();
+      return;
+    }
+
+    if (command.trim() === 'pwd') {
+      this.writeEmitter.fire(`${this.cwd}\r\n`);
+      this.commandHistory.push(command);
+      if (this.commandHistory.length > 10) { this.commandHistory.shift(); }
+      this.showPrompt();
+      return;
+    }
+
+    // Intercept `cd` — each spawn is a fresh subprocess so cd won't persist otherwise
+    const cdMatch = command.match(/^cd(?:\s+(.+))?$/);
+    if (cdMatch) {
+      const target = (cdMatch[1] || os.homedir()).trim().replace(/^~(?=\/|$)/, os.homedir());
+      const resolved = path.resolve(this.cwd, target);
+      try {
+        if (fs.statSync(resolved).isDirectory()) {
+          this.cwd = resolved;
+        } else {
+          this.writeEmitter.fire(`\x1b[31mcd: not a directory: ${target}\x1b[0m\r\n`);
+        }
+      } catch {
+        this.writeEmitter.fire(`\x1b[31mcd: no such file or directory: ${target}\x1b[0m\r\n`);
+      }
+      this.commandHistory.push(command);
+      if (this.commandHistory.length > 10) { this.commandHistory.shift(); }
+      this.showPrompt();
+      return;
+    }
+
     // Notify Smart Terminal panel to clear and start fresh for this command
     this.onCommandStart?.();
 
@@ -328,7 +366,12 @@ export class SmartTerminal implements vscode.Pseudoterminal {
   }
 
   private showPrompt(): void {
-    this.writeEmitter.fire('\r\n\x1b[36mask ai>\x1b[0m ');
+    const username = os.userInfo().username;
+    const hostname = os.hostname().replace(/\.local$/, '');
+    const folder = path.basename(this.cwd) || this.cwd;
+    this.writeEmitter.fire(
+      `\r\n\x1b[32m${username}@${hostname}\x1b[0m \x1b[1;34m${folder}\x1b[0m \x1b[36m(ask ai)\x1b[0m » `
+    );
   }
 
   close(): void {
